@@ -1,18 +1,18 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyCePsad6CJ95B2JZHxCkvAApW3adPkSjX0",
+  authDomain: "urbanpulse-f8def.firebaseapp.com",
+  projectId: "urbanpulse-f8def",
+  storageBucket: "urbanpulse-f8def.appspot.com",
+  messagingSenderId: "981556499502",
+  appId: "1:981556499502:web:4eeb4041fb8774b9a5fbbf"
 };
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
-export const provider = new GoogleAuthProvider();
-
+export const storage = getStorage(app);

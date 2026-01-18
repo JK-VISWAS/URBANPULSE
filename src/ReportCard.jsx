@@ -1,42 +1,95 @@
 import React from 'react';
-import { Trash2 } from 'lucide-react';
+import { Trash2, MapPin, Clock, ArrowUpRight, CheckCircle2, AlertCircle } from 'lucide-react';
 
 const ReportCard = ({ report, isAdmin, onDelete, onToggle }) => {
-    return (
-        <div className="bg-white p-5 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-md transition-all flex flex-col">
-            {/* IMAGE DISPLAY */}
-            {report.imageUrl && (
-                <div className="relative h-44 w-full mb-4 overflow-hidden rounded-2xl">
-                    <img src={report.imageUrl} className="object-cover w-full h-full" alt="evidence" />
-                </div>
-            )}
+    // Format the Firebase timestamp into a readable string
+    const formattedDate = report.createdAt?.toDate
+        ? report.createdAt.toDate().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+        : 'Just now';
 
-            <div className="flex justify-between items-start mb-2">
-                <h4 className="font-extrabold text-slate-800 text-lg leading-tight">{report.title}</h4>
-                <span className={`text-[10px] font-bold px-2 py-1 rounded-lg uppercase tracking-wider ${report.status === 'Resolved' ? 'bg-emerald-100 text-emerald-600' : 'bg-amber-100 text-amber-600'}`}>
-                    {report.status || 'Pending'}
-                </span>
+    return (
+        <div className="group bg-white rounded-[32px] border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden h-full">
+
+            {/* 1. IMAGE DISPLAY WITH STATUS OVERLAY */}
+            <div className="relative h-48 w-full overflow-hidden bg-slate-100">
+                {report.imageUrl ? (
+                    <img
+                        src={report.imageUrl}
+                        className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+                        alt={report.title}
+                    />
+                ) : (
+                    <div className="w-full h-full flex items-center justify-center text-slate-300">
+                        <MapPin size={40} strokeWidth={1} />
+                    </div>
+                )}
+
+                {/* Category Badge Overlaid on Image */}
+                <div className="absolute top-4 left-4">
+                    <span className="bg-white/90 backdrop-blur-md text-slate-900 text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-[0.1em] shadow-sm">
+                        {report.category || 'General'}
+                    </span>
+                </div>
             </div>
 
-            <p className="text-xs text-slate-500 mb-6 flex-grow line-clamp-2">{report.description}</p>
+            {/* 2. CARD CONTENT */}
+            <div className="p-6 flex flex-col flex-grow">
+                <div className="flex justify-between items-start mb-3 gap-2">
+                    <h4 className="font-black text-slate-900 text-lg leading-tight group-hover:text-indigo-600 transition-colors">
+                        {report.title}
+                    </h4>
+                    <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase ${report.status === 'Resolved' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'
+                        }`}>
+                        {report.status === 'Resolved' ? <CheckCircle2 size={12} /> : <AlertCircle size={12} />}
+                        {report.status || 'Pending'}
+                    </div>
+                </div>
 
-            {/* ADMIN CONTROL AGENT */}
-            {isAdmin && (
-                <div className="flex gap-2 pt-4 border-t border-slate-50">
-                    <button
-                        onClick={() => onToggle(report.id, report.status)}
-                        className="flex-1 bg-slate-900 text-white py-3 rounded-xl text-[10px] font-black uppercase hover:bg-slate-800"
-                    >
-                        {report.status === 'Resolved' ? 'Re-open' : 'Mark Fixed'}
-                    </button>
-                    <button
-                        onClick={() => onDelete(report.id)}
-                        className="bg-rose-50 text-rose-600 p-3 rounded-xl hover:bg-rose-600 hover:text-white transition-colors"
-                    >
-                        <Trash2 size={16} />
+                <p className="text-sm text-slate-500 mb-6 line-clamp-3 leading-relaxed">
+                    {report.description}
+                </p>
+
+                {/* 3. METADATA FOOTER */}
+                <div className="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between text-slate-400">
+                    <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-1">
+                            <Clock size={14} />
+                            <span className="text-[11px] font-bold">{formattedDate}</span>
+                        </div>
+                        {report.location && (
+                            <div className="flex items-center gap-1">
+                                <MapPin size={14} className="text-indigo-400" />
+                                <span className="text-[11px] font-bold">Lvl. {Math.round(report.location.lat)}</span>
+                            </div>
+                        )}
+                    </div>
+                    <button className="text-indigo-500 hover:text-indigo-700 transition-colors">
+                        <ArrowUpRight size={18} />
                     </button>
                 </div>
-            )}
+
+                {/* 4. ADMIN CONTROL PANEL */}
+                {isAdmin && (
+                    <div className="mt-6 flex gap-3">
+                        <button
+                            onClick={() => onToggle(report.id, report.status)}
+                            className={`flex-1 py-3 rounded-2xl text-[11px] font-black uppercase tracking-wider transition-all ${report.status === 'Resolved'
+                                    ? 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                                    : 'bg-indigo-600 text-white shadow-lg shadow-indigo-100 hover:bg-indigo-700'
+                                }`}
+                        >
+                            {report.status === 'Resolved' ? 'Re-open Case' : 'Resolve Issue'}
+                        </button>
+                        <button
+                            onClick={() => onDelete(report.id)}
+                            className="bg-rose-50 text-rose-500 p-3 rounded-2xl hover:bg-rose-500 hover:text-white transition-all duration-300"
+                            title="Delete Report"
+                        >
+                            <Trash2 size={18} />
+                        </button>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
