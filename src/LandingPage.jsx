@@ -6,12 +6,12 @@ const LandingPage = ({ onEnter }) => {
       {/* 1. THE VIDEO LAYER */}
       <video
         autoPlay
-        muted
         loop
+        muted
         playsInline
         className="absolute top-0 left-0 w-full h-full object-cover z-0 brightness-[0.4]"
       >
-        <source src="/assets/hero.webm" type="video/webm" />
+        <source src={`${import.meta.env.BASE_URL}assets/hero.mp4`} type="video/mp4" />
       </video>
 
       {/* 2. THE INTERACTIVE LAYER */}
