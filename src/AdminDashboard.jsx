@@ -113,16 +113,16 @@ const AdminDashboard = ({ reports }) => {
   };
 
   return (
-    <div className="p-8 animate-fade-in">
-      <header className="flex justify-between items-center mb-10">
-        <h1 className="text-4xl font-black italic uppercase">Admin Command Center</h1>
+    <div className="p-4 md:p-8 animate-fade-in">
+      <header className="flex justify-between items-center mb-8 md:mb-10">
+        <h1 className="text-2xl md:text-4xl font-black italic uppercase">Admin Command Center</h1>
         <div className="flex gap-4">
           <div className="bg-slate-900 text-white px-6 py-2 rounded-full font-bold">Live Data</div>
         </div>
       </header>
 
       {/* Admin-Only Spatial Intel Map */}
-      <div className="w-full h-[50vh] md:h-[450px] rounded-[40px] overflow-hidden mb-8 md:mb-12 shadow-2xl border-4 border-white">
+      <div className="w-full h-[45vh] md:h-[450px] rounded-[32px] md:rounded-[40px] overflow-hidden mb-6 md:mb-12 shadow-2xl border-4 border-white">
         <FreeMap reports={reports} />
       </div>
 
@@ -141,14 +141,14 @@ const AdminDashboard = ({ reports }) => {
               </button>
             </div>
 
-            <div className="h-40 md:h-48 bg-slate-200 cursor-pointer hover:opacity-90 transition-opacity" onClick={() => setSelectedReport(report)}>
+            <div className="h-36 sm:h-40 md:h-48 bg-slate-200 cursor-pointer hover:opacity-90 transition-opacity" onClick={() => setSelectedReport(report)}>
               {report.imageUrl ? (
                 <img src={report.imageUrl} className="w-full h-full object-cover" alt="Report" />
               ) : (
                 <div className="flex items-center justify-center h-full text-slate-400 font-bold uppercase">No Image</div>
               )}
             </div>
-            <div className="p-6">
+            <div className="p-4 md:p-6">
               <div className="flex justify-between items-start mb-3">
                 <span className="text-[10px] font-black uppercase text-indigo-500 bg-indigo-50 px-3 py-1 rounded-full">
                   {report.category}
@@ -157,7 +157,7 @@ const AdminDashboard = ({ reports }) => {
                   {report.status?.toUpperCase() || 'PENDING'}
                 </span>
               </div>
-              <h3 className="text-xl font-bold mb-2">{report.title}</h3>
+              <h3 className="text-lg md:text-xl font-bold mb-2">{report.title}</h3>
               <p className="text-slate-500 text-sm mb-4 line-clamp-2">{report.description}</p>
 
               {/* Admin Action Interface */}

@@ -202,8 +202,8 @@ const UserDashboard = ({ onOpenModal, reports }) => {
 
           <div className="space-y-4">
             <h4 className="text-xs font-black uppercase tracking-widest text-slate-500">Connect</h4>
-            <p className="text-slate-300">📧 support@urbanpulse.ai</p>
-            <p className="text-slate-300">📞 +91 40 2988 7766</p>
+            <p className="text-slate-300">📧 urbanpulse@gmail.com</p>
+            <p className="text-slate-300">📞 +91 8008207802</p>
           </div>
 
           <div className="space-y-4">

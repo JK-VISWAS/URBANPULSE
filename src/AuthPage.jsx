@@ -28,9 +28,9 @@ const AuthPage = ({ onAdminLogin }) => {
 
   return (
     <div className="min-h-screen w-full grid md:grid-cols-2 bg-slate-900 text-white">
-      <div className="flex items-center justify-center p-8">
-        <form onSubmit={handleAuth} className="bg-white text-slate-900 p-10 rounded-[40px] shadow-2xl w-full max-w-md">
-          <h2 className="text-3xl font-black mb-6 uppercase italic">UrbanPulse Login</h2>
+      <div className="flex items-center justify-center p-4 md:p-8">
+        <form onSubmit={handleAuth} className="bg-white text-slate-900 p-6 md:p-10 rounded-[28px] md:rounded-[40px] shadow-2xl w-full max-w-md">
+          <h2 className="text-2xl md:text-3xl font-black mb-6 uppercase italic">UrbanPulse Login</h2>
           <input
             type="email"
             placeholder="Email"
@@ -52,7 +52,7 @@ const AuthPage = ({ onAdminLogin }) => {
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           />
           {error && <div className="text-rose-600 text-sm mb-3">{error}</div>}
-          <button className="w-full bg-indigo-600 text-white p-5 rounded-2xl font-bold uppercase tracking-widest hover:bg-indigo-700 transition-all">
+          <button className="w-full bg-indigo-600 text-white p-4 md:p-5 rounded-2xl font-bold uppercase tracking-widest hover:bg-indigo-700 transition-all">
             {isLogin ? 'Citizen Sign In' : 'Create Account'}
           </button>
           <p
@@ -71,7 +71,7 @@ const AuthPage = ({ onAdminLogin }) => {
         </form>
       </div>
 
-      <div className="relative p-8 flex items-center justify-center">
+      <div className="relative p-8 hidden md:flex items-center justify-center">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 to-rose-600/20 blur-3xl" />
         <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-[40px] p-10 w-full max-w-md shadow-2xl">
           <h3 className="text-xl font-black uppercase tracking-widest text-white mb-4">UrbanPulse</h3>

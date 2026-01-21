@@ -27,7 +27,9 @@ export default function App() {
   const handleLogout = async () => {
     try {
       await auth.signOut();
-      setView('user'); // Reset to user view on logout
+      setAdminAccess(false);
+      setHasEntered(true);
+      setView('login');
     } catch (error) {
       console.error("Error signing out:", error);
     }
@@ -71,7 +73,7 @@ export default function App() {
     return unsubscribe;
   }, [user, view, adminAccess]);
 
-  // 2. CONDITIONAL RENDERING: Show Landing Page first
+  // 2. CONDITIONAL RENDERING: Show Landing Page first until user enters
   if (!hasEntered) {
     return <LandingPage onEnter={() => setHasEntered(true)} />;
   }
