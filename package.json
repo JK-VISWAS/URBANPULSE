@@ -1,8 +1,10 @@
 {
   "name": "community-app",
+  "homepage": "https://jk-viswas.github.io/urbanpulse",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  
   "scripts": {
     "dev": "vite",
     "build": "vite build",
