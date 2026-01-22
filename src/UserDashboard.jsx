@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { db, auth } from './firebase';
 import { signOut } from 'firebase/auth';
 
 const UserDashboard = ({ onOpenModal, reports }) => {
-  const navigate = useNavigate();
   const [editingReport, setEditingReport] = useState(null);
   const [editForm, setEditForm] = useState({ title: '', description: '', category: '' });
 
@@ -65,7 +63,6 @@ const UserDashboard = ({ onOpenModal, reports }) => {
       console.log("Logout clicked");
       await signOut(auth);
       console.log("Sign out successful");
-      navigate('/');
     } catch (error) {
       console.error("Logout error:", error);
       alert("Logout failed: " + error.message);
@@ -74,19 +71,6 @@ const UserDashboard = ({ onOpenModal, reports }) => {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Header with Logout */}
-      <header className="bg-white shadow-sm border-b border-slate-200 px-4 md:px-8 py-4">
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-black uppercase text-indigo-600">UrbanPulse Dashboard</h1>
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium"
-          >
-            Logout
-          </button>
-        </div>
-      </header>
-
       {/* Main Action Area */}
       {reports.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 px-4">
