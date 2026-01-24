@@ -52,6 +52,7 @@ export default function App() {
         setLoading(false);
       } else {
         setUser(currentUser);
+        setView('user');
         setLoading(false);
       }
     });
