@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from './LanguageContext';
 import 'leaflet/dist/leaflet.css';
 import LandingPage from './LandingPage';
 import ReportCard from './ReportCard';
@@ -21,7 +22,7 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [adminAccess, setAdminAccess] = useState(false);
-  const [lang, setLang] = useState(localStorage.getItem('appLang') || 'en');
+  const { t } = useLanguage();
 
 
 
@@ -38,11 +39,7 @@ export default function App() {
     }
   };
 
-  const toggleLanguage = () => {
-    const newLang = lang === 'en' ? 'te' : 'en';
-    setLang(newLang);
-    localStorage.setItem('appLang', newLang); // Saves choice globally
-  };
+
 
   // Report submission handled inside ReportModal
 
@@ -102,7 +99,7 @@ export default function App() {
   // Not logged in: show AuthPage or AdminLogin (separate admin page)
   if (!user && !adminAccess) {
     if (view === 'admin-login') {
-      return <AdminLogin onAuthorized={() => { setAdminAccess(true); setView('admin'); }} />;
+      return <AdminLogin onAuthorized={() => { setAdminAccess(true); setView('admin'); }} onBack={() => setView('login')} />;
     }
     return <AuthPage onAdminLogin={() => setView('admin-login')} />;
   }
@@ -111,7 +108,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-50">
       <header className="flex justify-between items-center p-4 md:p-8 bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100 shadow-sm">
-        <div className="text-2xl font-black italic uppercase tracking-tighter">URBAN<span className="text-indigo-600">PULSE</span></div>
+        <div className="text-2xl font-black italic uppercase tracking-tighter">{t('dashboard.title')}<span className="text-indigo-600">{t('dashboard.titleSuffix')}</span></div>
         <div className="flex items-center gap-3">
           {view === 'user' && (
             <button
@@ -119,14 +116,14 @@ export default function App() {
               className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-2xl font-bold text-sm uppercase shadow-lg hover:shadow-xl hover:from-indigo-700 hover:to-indigo-800 transition-all transform hover:-translate-y-0.5"
             >
               <span className="text-lg">+</span>
-              NEW REPORT
+              {t('dashboard.newReport')}
             </button>
           )}
           <button
             onClick={handleLogout}
             className="px-5 py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm uppercase hover:bg-slate-800 transition-all shadow-md hover:shadow-lg"
           >
-            LOGOUT
+            {t('dashboard.logout')}
           </button>
         </div>
       </header>

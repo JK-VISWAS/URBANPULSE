@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useLanguage } from './LanguageContext';
 import { doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { db } from './firebase';
 
 const UserDashboard = ({ onOpenModal, reports }) => {
+  const { t } = useLanguage();
   const [editingReport, setEditingReport] = useState(null);
   const [editForm, setEditForm] = useState({ title: '', description: '', category: '' });
 
@@ -65,13 +67,13 @@ const UserDashboard = ({ onOpenModal, reports }) => {
       {reports.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 px-4">
           <h2 className="text-4xl md:text-6xl font-black uppercase text-center mb-8">
-            Optimize Your <span className="text-indigo-600 italic">Grid.</span>
+            {t('dashboard.heroTitle')}<span className="text-indigo-600 italic">{t('dashboard.heroHighlight')}</span>
           </h2>
           <button
             onClick={onOpenModal}
             className="animate-glow bg-indigo-600 text-white px-12 py-5 rounded-[32px] text-xl font-bold"
           >
-            + GET STARTED
+            + {t('dashboard.getStarted')}
           </button>
         </div>
       ) : (
@@ -218,18 +220,18 @@ const UserDashboard = ({ onOpenModal, reports }) => {
           <div className="animate-reveal">
             <h3 className="text-3xl font-black italic uppercase text-indigo-500 mb-4">UrbanPulse</h3>
             <p className="text-slate-400 text-sm leading-relaxed">
-              The next generation of urban logistics. Bridging the gap between citizens and administrators.
+              {t('dashboard.footer.tagline')}
             </p>
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-xs font-black uppercase tracking-widest text-slate-500">Connect</h4>
+            <h4 className="text-xs font-black uppercase tracking-widest text-slate-500">{t('dashboard.footer.connect')}</h4>
             <p className="text-slate-300">📧 urbanpulse@gmail.com</p>
             <p className="text-slate-300">📞 +91 8008207802</p>
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-xs font-black uppercase tracking-widest text-slate-500">HQ Address</h4>
+            <h4 className="text-xs font-black uppercase tracking-widest text-slate-500">{t('dashboard.footer.hq')}</h4>
             <p className="text-slate-300">
               Level 7, T-Hub Phase 2,<br />
               Madhapur, Hyderabad,<br />

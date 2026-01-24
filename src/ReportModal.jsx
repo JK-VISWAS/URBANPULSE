@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useLanguage } from './LanguageContext';
 import { X, Send, MapPin, Camera, Loader2, CheckCircle, Mic, Square, Trash2, Play } from 'lucide-react';
 import { auth, db } from './firebase';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 
 const ReportModal = ({ isOpen, onClose }) => {
+    const { t } = useLanguage();
     const [loading, setLoading] = useState(false);
     const [locationLoading, setLocationLoading] = useState(false);
     const [previewUrl, setPreviewUrl] = useState(null);
@@ -224,25 +226,25 @@ const ReportModal = ({ isOpen, onClose }) => {
                 </button>
 
                 <div className="mb-10">
-                    <h2 className="text-4xl font-black text-slate-900 tracking-tight">Report Issue</h2>
-                    <p className="text-slate-500 font-bold mt-2">Help optimize our urban grid.</p>
+                    <h2 className="text-4xl font-black text-slate-900 tracking-tight">{t('reportMod.title')}</h2>
+                    <p className="text-slate-500 font-bold mt-2">{t('reportMod.subtitle')}</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-8">
                     {/* Title & Category Row */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Title</label>
+                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">{t('reportMod.fTitle')}</label>
                             <input
                                 required
                                 className="w-full bg-slate-50 border-2 border-transparent focus:border-indigo-500 rounded-3xl p-5 outline-none transition-all font-bold text-slate-900 shadow-inner"
-                                placeholder="Issue name..."
+                                placeholder={t('reportMod.fTitlePlace')}
                                 value={formData.title}
                                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                             />
                         </div>
                         <div className="space-y-2">
-                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Category</label>
+                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">{t('reportMod.fCat')}</label>
                             <select
                                 className="w-full bg-slate-50 border-2 border-transparent focus:border-indigo-500 rounded-3xl p-5 outline-none transition-all font-bold text-slate-900 shadow-inner appearance-none"
                                 value={formData.category}
@@ -258,12 +260,12 @@ const ReportModal = ({ isOpen, onClose }) => {
 
                     {/* Description */}
                     <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Description</label>
+                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">{t('reportMod.fDesc')}</label>
                         <textarea
                             required
                             rows="3"
                             className="w-full bg-slate-50 border-2 border-transparent focus:border-indigo-500 rounded-3xl p-5 outline-none transition-all font-bold text-slate-900 shadow-inner"
-                            placeholder="Provide details..."
+                            placeholder={t('reportMod.fDescPlace')}
                             value={formData.description}
                             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                         ></textarea>
@@ -288,7 +290,7 @@ const ReportModal = ({ isOpen, onClose }) => {
                                 ) : (
                                     <>
                                         <Camera className="text-slate-400 mb-2" />
-                                        <span className="text-[10px] font-black text-slate-500 uppercase">Attach Photo</span>
+                                        <span className="text-[10px] font-black text-slate-500 uppercase">{t('reportMod.attach')}</span>
                                     </>
                                 )}
                             </label>
@@ -307,13 +309,13 @@ const ReportModal = ({ isOpen, onClose }) => {
                             ) : formData.location ? (
                                 <>
                                     <CheckCircle className="mb-1" size={20} />
-                                    <span className="text-[10px] font-black uppercase tracking-widest mb-1">Pinned</span>
+                                    <span className="text-[10px] font-black uppercase tracking-widest mb-1">{t('reportMod.pinned')}</span>
                                     {address && <span className="text-[9px] font-medium leading-tight line-clamp-2 px-2">{address}</span>}
                                 </>
                             ) : (
                                 <>
                                     <MapPin className="mb-2" />
-                                    <span className="text-[10px] font-black uppercase tracking-widest">Pin Location</span>
+                                    <span className="text-[10px] font-black uppercase tracking-widest">{t('reportMod.pin')}</span>
                                 </>
                             )}
                         </button>
@@ -321,7 +323,7 @@ const ReportModal = ({ isOpen, onClose }) => {
 
                     {/* Audio Recording Section */}
                     <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Voice Message (Optional)</label>
+                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">{t('reportMod.voice')}</label>
                         <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-[24px] border-2 border-slate-100">
                             {!audioUrl && !isRecording ? (
                                 <button
@@ -332,7 +334,7 @@ const ReportModal = ({ isOpen, onClose }) => {
                                     <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center group-hover:bg-indigo-100 transition-colors">
                                         <Mic size={18} />
                                     </div>
-                                    <span>Record Audio</span>
+                                    <span>{t('reportMod.record')}</span>
                                 </button>
                             ) : isRecording ? (
                                 <div className="flex items-center gap-3 w-full">
@@ -345,7 +347,7 @@ const ReportModal = ({ isOpen, onClose }) => {
                                         onClick={stopRecording}
                                         className="ml-auto bg-slate-900 text-white px-4 py-2 rounded-full text-[10px] font-black uppercase hover:bg-slate-800"
                                     >
-                                        Stop
+                                        {t('reportMod.stop')}
                                     </button>
                                 </div>
                             ) : (
@@ -354,8 +356,8 @@ const ReportModal = ({ isOpen, onClose }) => {
                                         <Play size={18} fill="currentColor" />
                                     </div>
                                     <div className="flex-1">
-                                        <span className="text-slate-900 font-bold text-xs uppercase block">Audio Recorded</span>
-                                        <span className="text-slate-400 text-[10px] font-bold uppercase">Ready to send</span>
+                                        <span className="text-slate-900 font-bold text-xs uppercase block">{t('reportMod.recorded')}</span>
+                                        <span className="text-slate-400 text-[10px] font-bold uppercase">{t('reportMod.ready')}</span>
                                     </div>
                                     <audio src={audioUrl} controls className="hidden" />
                                     <button
@@ -376,7 +378,7 @@ const ReportModal = ({ isOpen, onClose }) => {
                         className="w-full bg-slate-900 text-white p-6 rounded-[32px] font-black text-xl shadow-2xl shadow-slate-200 hover:bg-indigo-600 hover:-translate-y-1 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:translate-y-0"
                     >
                         {loading ? <Loader2 className="animate-spin" /> : <Send size={24} />}
-                        {loading ? 'UPLOADING...' : 'SUBMIT DATA'}
+                        {loading ? t('reportMod.uploading') : t('reportMod.submit')}
                     </button>
                 </form>
             </div>

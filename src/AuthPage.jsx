@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useLanguage } from './LanguageContext';
 import { auth, db } from './firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
 import { Eye, EyeOff } from 'lucide-react';
 
 const AuthPage = ({ onAdminLogin }) => {
+  const { t } = useLanguage();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({ email: '', password: '', phone: '' });
   const [error, setError] = useState('');
@@ -32,10 +34,10 @@ const AuthPage = ({ onAdminLogin }) => {
     <div className="min-h-screen w-full grid md:grid-cols-2 bg-slate-900 text-white">
       <div className="flex items-center justify-center p-4 md:p-8">
         <form onSubmit={handleAuth} className="bg-white text-slate-900 p-6 md:p-10 rounded-[28px] md:rounded-[40px] shadow-2xl w-full max-w-md">
-          <h2 className="text-2xl md:text-3xl font-black mb-6 uppercase italic">UrbanPulse Login</h2>
+          <h2 className="text-2xl md:text-3xl font-black mb-6 uppercase italic">{t('auth.loginTitle')}</h2>
           <input
             type="email"
-            placeholder="Email"
+            placeholder={t('auth.emailPlace')}
             autoComplete="email"
             className="w-full mb-4 p-4 bg-slate-100 rounded-2xl outline-none"
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -43,7 +45,7 @@ const AuthPage = ({ onAdminLogin }) => {
           {!isLogin && (
             <input
               type="tel"
-              placeholder="Phone Number"
+              placeholder={t('auth.phonePlace')}
               autoComplete="tel"
               className="w-full mb-4 p-4 bg-slate-100 rounded-2xl outline-none"
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -52,7 +54,7 @@ const AuthPage = ({ onAdminLogin }) => {
           <div className="relative mb-6">
             <input
               type={showPassword ? "text" : "password"}
-              placeholder="Password"
+              placeholder={t('auth.passPlace')}
               autoComplete={isLogin ? "current-password" : "new-password"}
               className="w-full p-4 bg-slate-100 rounded-2xl outline-none pr-12"
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -67,20 +69,20 @@ const AuthPage = ({ onAdminLogin }) => {
           </div>
           {error && <div className="text-rose-600 text-sm mb-3">{error}</div>}
           <button className="w-full bg-indigo-600 text-white p-4 md:p-5 rounded-2xl font-bold uppercase tracking-widest hover:bg-indigo-700 transition-all">
-            {isLogin ? 'Citizen Sign In' : 'Create Account'}
+            {isLogin ? t('auth.signIn') : t('auth.createAccount')}
           </button>
           <p
             className="mt-6 text-center text-slate-400 cursor-pointer text-sm"
             onClick={() => setIsLogin(!isLogin)}
           >
-            {isLogin ? "Don't have an account? Sign Up" : "Already have an account? Login"}
+            {isLogin ? t('auth.noAccount') : t('auth.hasAccount')}
           </p>
           <button
             type="button"
             onClick={() => onAdminLogin?.()}
             className="mt-4 w-full text-xs font-bold text-slate-500 uppercase hover:text-rose-500 transition-colors"
           >
-            Access Admin Portal
+            {t('auth.adminAccess')}
           </button>
         </form>
       </div>
@@ -88,12 +90,12 @@ const AuthPage = ({ onAdminLogin }) => {
       <div className="relative p-8 hidden md:flex items-center justify-center">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 to-rose-600/20 blur-3xl" />
         <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-[40px] p-10 w-full max-w-md shadow-2xl">
-          <h3 className="text-xl font-black uppercase tracking-widest text-white mb-4">UrbanPulse</h3>
-          <p className="text-slate-200 mb-6">Optimize the grid with secure access.</p>
+          <h3 className="text-xl font-black uppercase tracking-widest text-white mb-4">{t('auth.marketing.title')}</h3>
+          <p className="text-slate-200 mb-6">{t('auth.marketing.tagline')}</p>
           <ul className="text-slate-300 text-sm space-y-2">
-            <li>• Citizen reports feed</li>
-            <li>• Admin command center</li>
-            <li>• Live map with pins</li>
+            <li>• {t('auth.marketing.points.0')}</li>
+            <li>• {t('auth.marketing.points.1')}</li>
+            <li>• {t('auth.marketing.points.2')}</li>
           </ul>
         </div>
       </div>

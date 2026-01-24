@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 
-const AdminLogin = ({ onAuthorized }) => {
+const AdminLogin = ({ onAuthorized, onBack }) => {
   const [passcode, setPasscode] = useState('');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -42,6 +42,13 @@ const AdminLogin = ({ onAuthorized }) => {
           {error && <div className="text-rose-400 text-sm">{error}</div>}
           <button className="w-full bg-rose-600 text-white p-3 md:p-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-rose-700 transition-all">
             Authorize
+          </button>
+          <button
+            type="button"
+            onClick={onBack}
+            className="w-full mt-2 text-xs font-bold text-slate-400 uppercase hover:text-white transition-colors"
+          >
+            Go Back
           </button>
         </form>
       </div>

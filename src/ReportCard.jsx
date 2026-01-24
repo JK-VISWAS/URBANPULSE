@@ -1,7 +1,9 @@
 import React from 'react';
+import { useLanguage } from './LanguageContext';
 import { Trash2, MapPin, Clock, ArrowUpRight, CheckCircle2, AlertCircle, Play } from 'lucide-react';
 
 const ReportCard = ({ report, isAdmin, onDelete, onToggle }) => {
+    const { t } = useLanguage();
     // Format the Firebase timestamp into a readable string
     const formattedDate = report.createdAt?.toDate
         ? report.createdAt.toDate().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
@@ -41,7 +43,7 @@ const ReportCard = ({ report, isAdmin, onDelete, onToggle }) => {
                     <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase ${report.status === 'Resolved' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'
                         }`}>
                         {report.status === 'Resolved' ? <CheckCircle2 size={12} /> : <AlertCircle size={12} />}
-                        {report.status || 'Pending'}
+                        {report.status || t('reportCard.pending')}
                     </div>
                 </div>
 
@@ -56,7 +58,7 @@ const ReportCard = ({ report, isAdmin, onDelete, onToggle }) => {
                             <Play size={16} fill="currentColor" />
                         </div>
                         <div className="flex-1 min-w-0">
-                            <span className="text-[10px] font-black uppercase text-indigo-500 block mb-1">Voice Message</span>
+                            <span className="text-[10px] font-black uppercase text-indigo-500 block mb-1">{t('reportCard.voice')}</span>
                             <audio controls src={report.audioUrl} className="w-full h-8" />
                         </div>
                     </div>
