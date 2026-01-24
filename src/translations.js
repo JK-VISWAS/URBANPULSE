@@ -50,6 +50,12 @@ export const translations = {
             fPhone: "Mobile Number",
             fPhonePlace: "Enter 10-digit number",
             attach: "Attach Photo",
+            categories: {
+                Roads: "Roads",
+                Sanitation: "Sanitation",
+                Utilities: "Utilities",
+                Vandalism: "Vandalism"
+            },
             pin: "Pin Location",
             pinned: "Pinned",
             voice: "Voice Message (Optional)",
@@ -144,6 +150,12 @@ export const translations = {
             fPhone: "మొబైల్ నంబర్",
             fPhonePlace: "10-అంకెల సంఖ్యను నమోదు చేయండి",
             attach: "ఫోటోను జోడించండి",
+            categories: {
+                Roads: "రహదారులు",
+                Sanitation: "పారిశుధ్యం",
+                Utilities: "నిత్యవసరాలు",
+                Vandalism: "విధ్వంసం"
+            },
             pin: "స్థానాన్ని పిన్ చేయండి",
             pinned: "పిన్ చేయబడింది",
             voice: "వాయిస్ సందేశం (ఐచ్ఛికం)",

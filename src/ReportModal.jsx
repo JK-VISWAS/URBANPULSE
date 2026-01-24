@@ -252,10 +252,10 @@ const ReportModal = ({ isOpen, onClose }) => {
                                 value={formData.category}
                                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                             >
-                                <option>Roads</option>
-                                <option>Sanitation</option>
-                                <option>Utilities</option>
-                                <option>Vandalism</option>
+                                <option value="Roads">{t('reportMod.categories.Roads')}</option>
+                                <option value="Sanitation">{t('reportMod.categories.Sanitation')}</option>
+                                <option value="Utilities">{t('reportMod.categories.Utilities')}</option>
+                                <option value="Vandalism">{t('reportMod.categories.Vandalism')}</option>
                             </select>
                         </div>
                     </div>

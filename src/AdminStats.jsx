@@ -94,7 +94,7 @@ const AdminStats = ({ reports }) => {
                     {Object.entries(stats.categories).map(([cat, count]) => (
                         <div key={cat} className="space-y-1">
                             <div className="flex justify-between text-xs font-bold px-1">
-                                <span className="text-slate-600">{cat}</span>
+                                <span className="text-slate-600">{t(`reportMod.categories.${cat}`) || cat}</span>
                                 <span className="text-slate-900">{count}</span>
                             </div>
                             <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
