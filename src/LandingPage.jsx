@@ -16,13 +16,15 @@ const LandingPage = ({ onEnter }) => {
         preload="auto"
         style={{
           position: 'fixed',
-          right: 0,
-          bottom: 0,
-          minWidth: '100%',
-          minHeight: '100%',
+          top: 0,
+          left: 0,
+          width: '100dvw',
+          height: '100dvh',
           objectFit: 'cover',
           zIndex: -1,
-          filter: 'brightness(1.5)',
+          transform: 'translateZ(0)', // Force GPU
+          willChange: 'transform',
+          pointerEvents: 'none',
         }}
       >
         <source src={`${import.meta.env.BASE_URL}assets/hero.mp4`} type="video/mp4" />
