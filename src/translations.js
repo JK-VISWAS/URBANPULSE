@@ -14,6 +14,7 @@ export const translations = {
             noAccount: "Don't have an account? Sign Up",
             hasAccount: "Already have an account? Login",
             adminAccess: "Access Admin Portal",
+            backToHome: "Back to Home",
             marketing: {
                 title: "URBANPULSE",
                 tagline: "Optimize the grid with secure access.",
@@ -81,6 +82,15 @@ export const translations = {
             resolveDesc: "Describe what was done to resolve this issue...",
             markResolved: "MARK AS RESOLVED",
             close: "Close"
+        },
+        stats: {
+            total: "Total Reports",
+            resRate: "Resolution Rate",
+            overview: "Status Overview",
+            resolved: "Resolved",
+            pending: "Pending",
+            inProgress: "In Progress",
+            categories: "Categories"
         }
     },
     te: {
@@ -98,6 +108,7 @@ export const translations = {
             noAccount: "ఖాతా లేదా? సైన్ అప్ చేయండి",
             hasAccount: "ఇప్పటికే ఖాతా ఉందా? లాగిన్ అవ్వండి",
             adminAccess: "అడ్మిన్ పోర్టల్",
+            backToHome: "ముఖ్య పేజీకి తిరిగి వెళ్ళు",
             marketing: {
                 title: "అర్బన్ పల్స్",
                 tagline: "సురక్షిత ప్రాప్యతతో గ్రిడ్‌ను ఆప్టిమైజ్ చేయండి.",
@@ -165,6 +176,15 @@ export const translations = {
             resolveDesc: "ఈ సమస్యను పరిష్కరించడానికి ఏమి చేశారో వివరించండి...",
             markResolved: "పరిష్కరించినట్లు గుర్తించండి",
             close: "మూసివేయి"
+        },
+        stats: {
+            total: "మొత్తం నివేదికలు",
+            resRate: "పరిష్కార శాతం",
+            overview: "స్థితి అవలోకనం",
+            resolved: "పరిష్కరించబడింది",
+            pending: "పెండింగ్‌లో ఉంది",
+            inProgress: "పురోగతిలో ఉంది",
+            categories: "వర్గాలు"
         }
     }
 };

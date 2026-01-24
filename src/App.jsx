@@ -101,7 +101,7 @@ export default function App() {
     if (view === 'admin-login') {
       return <AdminLogin onAuthorized={() => { setAdminAccess(true); setView('admin'); }} onBack={() => setView('login')} />;
     }
-    return <AuthPage onAdminLogin={() => setView('admin-login')} />;
+    return <AuthPage onAdminLogin={() => setView('admin-login')} onBackToHome={() => setHasEntered(false)} />;
   }
 
   // 3. THE ACTUAL DASHBOARD

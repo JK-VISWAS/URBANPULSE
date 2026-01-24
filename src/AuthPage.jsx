@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 import { setDoc, doc } from 'firebase/firestore';
 import { Eye, EyeOff } from 'lucide-react';
 
-const AuthPage = ({ onAdminLogin }) => {
+const AuthPage = ({ onAdminLogin, onBackToHome }) => {
   const { t } = useLanguage();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({ email: '', password: '', phone: '' });
@@ -83,6 +83,13 @@ const AuthPage = ({ onAdminLogin }) => {
             className="mt-4 w-full text-xs font-bold text-slate-500 uppercase hover:text-rose-500 transition-colors"
           >
             {t('auth.adminAccess')}
+          </button>
+          <button
+            type="button"
+            onClick={() => onBackToHome?.()}
+            className="mt-2 w-full text-xs font-bold text-slate-400 uppercase hover:text-indigo-500 transition-colors"
+          >
+            {t('auth.backToHome') || "Back to Home"}
           </button>
         </form>
       </div>

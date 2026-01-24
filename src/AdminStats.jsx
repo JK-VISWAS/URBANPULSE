@@ -1,7 +1,9 @@
 import React, { useMemo } from 'react';
+import { useLanguage } from './LanguageContext';
 import { BarChart3, PieChart, Activity, TrendingUp, CheckCircle2, AlertCircle, Clock } from 'lucide-react';
 
 const AdminStats = ({ reports }) => {
+    const { t } = useLanguage();
     const stats = useMemo(() => {
         const total = reports.length;
         const resolved = reports.filter(r => r.status === 'resolved').length;
@@ -35,12 +37,12 @@ const AdminStats = ({ reports }) => {
                 <div className="relative z-10">
                     <div className="flex items-center gap-3 mb-4 text-slate-400">
                         <BarChart3 size={20} />
-                        <span className="font-bold text-xs uppercase tracking-widest">Total Reports</span>
+                        <span className="font-bold text-xs uppercase tracking-widest">{t('stats.total')}</span>
                     </div>
                     <div className="text-5xl font-black mb-2">{stats.total}</div>
                     <div className="flex items-center gap-2 text-emerald-400 text-sm font-bold">
                         <TrendingUp size={16} />
-                        <span>{stats.resolutionRate}% Resolution Rate</span>
+                        <span>{stats.resolutionRate}% {t('stats.resRate')}</span>
                     </div>
                 </div>
             </div>
@@ -49,7 +51,7 @@ const AdminStats = ({ reports }) => {
             <div className="bg-white rounded-[32px] p-6 shadow-lg border border-slate-100">
                 <div className="flex items-center gap-3 mb-6 text-slate-500">
                     <PieChart size={20} />
-                    <span className="font-bold text-xs uppercase tracking-widest">Status Overview</span>
+                    <span className="font-bold text-xs uppercase tracking-widest">{t('stats.overview')}</span>
                 </div>
                 <div className="space-y-4">
                     <div className="flex items-center justify-between">
@@ -57,7 +59,7 @@ const AdminStats = ({ reports }) => {
                             <div className="p-2 bg-emerald-100 text-emerald-600 rounded-xl">
                                 <CheckCircle2 size={16} />
                             </div>
-                            <span className="font-bold text-sm text-slate-700">Resolved</span>
+                            <span className="font-bold text-sm text-slate-700">{t('stats.resolved')}</span>
                         </div>
                         <span className="font-black text-slate-900">{stats.resolved}</span>
                     </div>
@@ -66,7 +68,7 @@ const AdminStats = ({ reports }) => {
                             <div className="p-2 bg-amber-100 text-amber-600 rounded-xl">
                                 <AlertCircle size={16} />
                             </div>
-                            <span className="font-bold text-sm text-slate-700">Pending</span>
+                            <span className="font-bold text-sm text-slate-700">{t('stats.pending')}</span>
                         </div>
                         <span className="font-black text-slate-900">{stats.pending}</span>
                     </div>
@@ -75,7 +77,7 @@ const AdminStats = ({ reports }) => {
                             <div className="p-2 bg-blue-100 text-blue-600 rounded-xl">
                                 <Clock size={16} />
                             </div>
-                            <span className="font-bold text-sm text-slate-700">In Progress</span>
+                            <span className="font-bold text-sm text-slate-700">{t('stats.inProgress')}</span>
                         </div>
                         <span className="font-black text-slate-900">{stats.inProgress}</span>
                     </div>
@@ -86,7 +88,7 @@ const AdminStats = ({ reports }) => {
             <div className="bg-white rounded-[32px] p-6 shadow-lg border border-slate-100">
                 <div className="flex items-center gap-3 mb-6 text-slate-500">
                     <TrendingUp size={20} />
-                    <span className="font-bold text-xs uppercase tracking-widest">Categories</span>
+                    <span className="font-bold text-xs uppercase tracking-widest">{t('stats.categories')}</span>
                 </div>
                 <div className="space-y-3">
                     {Object.entries(stats.categories).map(([cat, count]) => (
